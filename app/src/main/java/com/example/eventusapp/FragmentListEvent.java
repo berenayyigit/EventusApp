@@ -39,7 +39,7 @@ public class FragmentListEvent extends Fragment {
         binding.recView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         EventRepo repo = new EventRepo();
-        ExecutorService srv = ((EventusApplication) getActivity().getApplication()).srv;
+        ExecutorService srv = ((EventApplication) getActivity().getApplication()).srv;
         repo.getAllEvents(srv, dataHandler);
 
         return binding.getRoot();

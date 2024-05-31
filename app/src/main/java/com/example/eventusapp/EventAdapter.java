@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
-public class EventAdapter {
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder>{
 
 
 
@@ -61,7 +61,8 @@ public class EventAdapter {
                     Navigation.findNavController((Activity) ctx,R.id.fragmentContainer);
 
             Bundle dataBundle = new Bundle();
-            dataBundle.putInt("operid",data.get(holder.getAdapterPosition()).getId());
+            dataBundle.putString("operid", String.valueOf(data.get(holder.getAdapterPosition()).getId()));
+
 
             navController.navigate(R.id.action_fragmentListEvent_to_FragmentDetails,dataBundle);
 
@@ -100,7 +101,7 @@ public class EventAdapter {
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
             row = itemView.findViewById(R.id.row_list);
-            txtName = itemView.findViewById(R.id.txtListName);
+            txtName = itemView.findViewById(R.id.txtEventName);
 
         }
 

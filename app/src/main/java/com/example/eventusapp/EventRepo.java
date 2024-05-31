@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutorService;
 
 public class EventRepo {
 
-    public void getAllOperatingSystems(ExecutorService srv, Handler uiHandler){
+    public void getAllEvents(ExecutorService srv, Handler uiHandler){
 
 
         srv.submit(()->{

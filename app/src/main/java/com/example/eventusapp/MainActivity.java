@@ -10,14 +10,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
-import com.example.eventusapp.databinding.ActivityMainBinding;
+import com.example.eventusapp.databinding.LayoutMainActivityBinding;
 public class MainActivity extends AppCompatActivity {
-    ActivityMainBinding binding;
+    LayoutMainActivityBinding binding;
     Toolbar toolBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = LayoutMainActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         NavHostFragment navHost = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);

@@ -11,7 +11,7 @@
         android:label="Events"
         tools:layout="@layout/fragment_list_event">
         <action
-            android:id="@+id/action_fragmentListEvent_to_fragmentDetails"
+            android:id="@+id/action_fragmentListEvent_to_FragmentDetails"
             app:destination="@id/fragmentDetails" />
     </fragment>
     <fragment
