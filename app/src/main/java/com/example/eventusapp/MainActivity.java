@@ -1,22 +1,37 @@
 package com.example.eventusapp;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
+import android.os.Bundle;
+import com.example.eventusapp.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
-
+    ActivityMainBinding binding;
+    Toolbar toolBar;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        //Entry point to an activity
-        //1) Load the layout
-        //2) Interact with UI components
+        NavHostFragment navHost = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+        NavController navController = navHost.getNavController();
 
-        setContentView(R.layout.layout_main_activity);
+        AppBarConfiguration conf = new AppBarConfiguration.Builder(navController.getGraph()).build();
+
+        toolBar = findViewById(R.id.toolbar);
+
+        toolBar.setTitle("Events");
+        NavigationUI.setupWithNavController(toolBar,navController,conf);
+
+    }
+    public Toolbar getToolBar() {
+        return toolBar;
     }
 }

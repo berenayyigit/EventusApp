@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/fragmentListEvent">
+
+    <fragment
+        android:id="@+id/fragmentListEvent"
+        android:name="com.example.eventusapp.FragmentListEvent"
+        android:label="Events"
+        tools:layout="@layout/fragment_list_event">
+        <action
+            android:id="@+id/action_fragmentListEvent_to_fragmentDetails"
+            app:destination="@id/fragmentDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDetails"
+        android:name="com.example.eventusapp.FragmentDetails"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
+</navigation>

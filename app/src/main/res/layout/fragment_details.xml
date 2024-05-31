@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <!-- Declare ViewModel or variables here if needed -->
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txtNameDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Name"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textIntro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Intro"
+            android:textSize="18sp" />
+
+
+
+    </LinearLayout>
+</layout>
