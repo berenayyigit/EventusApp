@@ -10,17 +10,33 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/txtNameDetail"
+            android:id="@+id/txtEventName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event Name"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/textIntro"
+            android:id="@+id/txtEventIntro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event Intro"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/txtEventDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Date"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/txtEventLoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Loc"
             android:textSize="18sp" />
 
 

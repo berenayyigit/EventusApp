@@ -25,8 +25,11 @@ public class FragmentDetails extends Fragment {
         public boolean handleMessage(@NonNull Message msg) {
 
             Event event = (Event) msg.obj;
-            binding.txtNameDetail.setText(event.getName());
-            binding.textIntro.setText(event.getIntro());
+            binding.txtEventName.setText(event.getName());
+            binding.txtEventIntro.setText(event.getIntro());
+            binding.txtEventDate.setText(event.getDate().getTime());
+            binding.txtEventLoc.setText(event.getLoc());
+
 
             ((MainActivity) getActivity()).getToolBar().setTitle(event.getName());
 

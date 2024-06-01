@@ -3,7 +3,7 @@ package com.example.eventusapp;
 import java.io.Serializable;
 
 public class EventDate implements Serializable {
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
 
     private String year;
     private String month;
@@ -69,7 +69,7 @@ public class EventDate implements Serializable {
     }
 
     public String getTime() {
-        return year + "-" + month + "-" + day + "-" + hour + "-" + minute;
+        return time;
     }
 
     public void setTime(String time) {
