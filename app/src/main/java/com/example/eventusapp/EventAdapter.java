@@ -61,7 +61,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                     Navigation.findNavController((Activity) ctx,R.id.fragmentContainer);
 
             Bundle dataBundle = new Bundle();
-            dataBundle.putString("operid", String.valueOf(data.get(holder.getAdapterPosition()).getId()));
+            dataBundle.putString("eventId", String.valueOf(data.get(holder.getBindingAdapterPosition()).getId()));
 
 
             navController.navigate(R.id.action_fragmentListEvent_to_FragmentDetails,dataBundle);

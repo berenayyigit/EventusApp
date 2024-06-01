@@ -13,7 +13,7 @@ public class Event implements Serializable {
     private EventDate date;
 
     // Default constructor
-    public Event(String name, String intro, String org, String loc, String date) {
+    public Event(String name, String intro, String org, String loc, String date, String string) {
         // No-argument constructor required for serialization
     }
 

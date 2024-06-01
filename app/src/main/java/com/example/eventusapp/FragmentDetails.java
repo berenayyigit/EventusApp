@@ -44,7 +44,7 @@ public class FragmentDetails extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentDetailsBinding.inflate(getLayoutInflater());
 
-        int eventId = getArguments().getInt("eventId");
+        String eventId = getArguments().getString("eventId");
 
         EventRepo repo = new EventRepo();
         ExecutorService srv = ((EventApplication) getActivity().getApplication()).srv;
