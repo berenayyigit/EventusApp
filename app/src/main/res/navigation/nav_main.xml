@@ -17,6 +17,7 @@
     <fragment
         android:id="@+id/fragmentDetails"
         android:name="com.example.eventusapp.FragmentDetails"
-        android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        android:label="Fragment Details">
+
+    </fragment>
 </navigation>

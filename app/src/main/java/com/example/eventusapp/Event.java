@@ -1,6 +1,7 @@
 package com.example.eventusapp;
 import java.io.Serializable;
 
+
 public class Event implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -8,22 +9,27 @@ public class Event implements Serializable {
     private String name;
     private String intro;
 
-    private Organization org;
-    private Location loc;
+    private String org;
+    private String loc;
     private EventDate date;
+    private String eventTime;
+
 
     // Default constructor
-    public Event(String name, String intro, String org, String loc, String date) {
+    public Event() {
         // No-argument constructor required for serialization
     }
 
     // Parameterized constructor
-    public Event(String name, String intro, Organization org, Location loc, EventDate date) {
+    public Event(String id, String name, String intro, String org, String loc, String eventTime) {
+        this.id = id;
         this.name = name;
         this.intro = intro;
         this.org = org;
         this.loc = loc;
-        this.date = date;
+        this.eventTime = eventTime;
+
+
     }
 
     // Getters and setters
@@ -48,17 +54,17 @@ public class Event implements Serializable {
         this.intro = intro;
     }
 
-    public Organization getOrg() {
+    public String getOrg() {
         return org;
     }
-    public void setOrg(Organization org) {
+    public void setOrg(String org) {
         this.org = org;
     }
 
-    public Location getLoc() {
+    public String getLoc() {
         return loc;
     }
-    public void setLoc(Location loc) {
+    public void setLoc(String loc) {
         this.loc = loc;
     }
 
@@ -67,5 +73,14 @@ public class Event implements Serializable {
     }
     public void setDate(EventDate date) {
         this.date = date;
+    }
+
+
+    public String getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(String eventTime) {
+        this.eventTime = eventTime;
     }
 }

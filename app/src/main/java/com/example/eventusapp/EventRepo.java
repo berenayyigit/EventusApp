@@ -29,7 +29,7 @@ public class EventRepo {
                 List<Event> data = new ArrayList<>();
 
                 URL url =
-                        new URL("http://localhost:8080/ourevents/events");
+                        new URL("http://10.0.2.2:8080/ourevents/events");
 
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -46,17 +46,22 @@ public class EventRepo {
 
                 JSONArray arr = new JSONArray(buffer.toString());
 
-                for (int i = 0; i <arr.length() ; i++) {
-
+                for (int i = 0; i < arr.length(); i++) {
                     JSONObject current = arr.getJSONObject(i);
 
-                    Event myevent = new Event(current.getString("name"),
+
+                    JSONObject dateObj = current.getJSONObject("date");
+
+                    Event myEvent = new Event(
+                            current.getString("id"),
+                            current.getString("name"),
                             current.getString("intro"),
                             current.getString("org"),
                             current.getString("loc"),
-                            current.getString("date"));
+                            dateObj.getString("time")
+                    );
 
-                    data.add(myevent);
+                    data.add(myEvent);
                 }
 
                 Message msg = new Message();
@@ -77,12 +82,12 @@ public class EventRepo {
         });
 
     }
-    public void getDataById(ExecutorService srv, Handler uiHandler,int id) {
+    public void getDataById(ExecutorService srv, Handler uiHandler,String id) {
 
 
         srv.execute(() -> {
             try {
-                URL url = new URL("http://10.3.0.14:8080/operatingsystemsapi/getbyid/" + String.valueOf(id));
+                URL url = new URL("http://10.0.2.2:8080/ourevents/events" + String.valueOf(id));
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
 
@@ -98,15 +103,22 @@ public class EventRepo {
                 }
 
                 JSONObject current = new JSONObject(buffer.toString());
-                Event myevent = new Event(current.getString("name"),
+
+
+                JSONObject dateObj = current.getJSONObject("date");
+
+                Event myEvent = new Event(
+                        current.getString("id"),
+                        current.getString("name"),
                         current.getString("intro"),
                         current.getString("org"),
                         current.getString("loc"),
-                        current.getString("date"));
+                        dateObj.getString("time")
+                );
 
 
                 Message msg = new Message();
-                msg.obj = myevent;
+                msg.obj = myEvent;
                 uiHandler.sendMessage(msg);
 
 
