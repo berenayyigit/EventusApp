@@ -1,6 +1,6 @@
 package com.example.eventusapp;
-import java.io.Serializable;
 
+import java.io.Serializable;
 
 public class Event implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -8,12 +8,11 @@ public class Event implements Serializable {
     private String id;
     private String name;
     private String intro;
-
     private String org;
     private String loc;
-    private EventDate date;
+    private String eventDate;
     private String eventTime;
-
+    private String imageUrl;
 
     // Default constructor
     public Event() {
@@ -21,15 +20,15 @@ public class Event implements Serializable {
     }
 
     // Parameterized constructor
-    public Event(String id, String name, String intro, String org, String loc, String eventTime) {
+    public Event(String id, String name, String intro, String org, String loc, String eventDate, String eventTime, String imageUrl) {
         this.id = id;
         this.name = name;
         this.intro = intro;
         this.org = org;
         this.loc = loc;
+        this.eventDate = eventDate;
         this.eventTime = eventTime;
-
-
+        this.imageUrl = imageUrl;
     }
 
     // Getters and setters
@@ -68,19 +67,16 @@ public class Event implements Serializable {
         this.loc = loc;
     }
 
-    public EventDate getDate() {
-        return date;
+    public String getEventDate() {
+        return eventDate;
     }
-    public void setDate(EventDate date) {
-        this.date = date;
-    }
-
-
-    public String getEventTime() {
-        return eventTime;
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
     }
 
-    public void setEventTime(String eventTime) {
-        this.eventTime = eventTime;
-    }
+    public String getEventTime() { return eventTime; }
+    public void setEventTime(String eventTime) { this.eventTime = eventTime;}
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
 }

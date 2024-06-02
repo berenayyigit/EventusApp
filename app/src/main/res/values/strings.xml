@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EventusApp</string>
+    <string name="event_image">Event Image</string>
 </resources>

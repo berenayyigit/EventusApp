@@ -1,11 +1,10 @@
 package com.example.eventusapp;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -15,6 +14,9 @@ import android.view.ViewGroup;
 
 import com.example.eventusapp.databinding.FragmentDetailsBinding;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.concurrent.ExecutorService;
 
 public class FragmentDetails extends Fragment {
@@ -35,10 +37,15 @@ public class FragmentDetails extends Fragment {
                 // Use the binding to access views and set data
                 binding.txtEventName.setText(event.getName());
                 binding.txtEventIntro.setText(event.getIntro());
-                binding.txtEventDate.setText(event.getEventTime());
+                binding.txtEventOrg.setText(event.getOrg());
+                binding.txtEventDate.setText(event.getEventDate());
+                binding.txtEventTime.setText(event.getEventTime());
                 binding.txtEventLoc.setText(event.getLoc());
 
                 ((MainActivity) getActivity()).getToolBar().setTitle(event.getName());
+
+                // Load event image
+                loadEventImage(event.getImageUrl());
             } else {
                 Log.e("FragmentDetails", "Received null event");
             }
@@ -69,5 +76,22 @@ public class FragmentDetails extends Fragment {
 
         // Return the root view of the binding
         return binding.getRoot();
+    }
+
+    private void loadEventImage(String imageUrl) {
+        ExecutorService srv = ((EventApplication) getActivity().getApplication()).srv;
+        srv.submit(() -> {
+            try {
+                URL url = new URL(imageUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                getActivity().runOnUiThread(() -> binding.imgEvent.setImageBitmap(myBitmap));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

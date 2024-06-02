@@ -46,9 +46,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
                 Event event = data.get(position);
 
                 holder.txtEventName.setText(event.getName());
-                holder.txtEventDate.setText(event.getEventTime());
+                holder.txtEventDate.setText(event.getEventDate());
+                holder.txtEventTime.setText(event.getEventTime());
 
-                ExecutorService srv = ((EventApplication)((MainActivity) ctx).getApplication()).srv;
+        ExecutorService srv = ((EventApplication)((MainActivity) ctx).getApplication()).srv;
                 Log.d("MyApp", "ExecutorService obtained successfully.");
 
                 holder.row.setOnClickListener(v -> {
@@ -80,6 +81,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         ConstraintLayout row;
         TextView txtEventName;
         TextView txtEventDate;
+        TextView txtEventTime;
         TextView txtEventLoc;
         TextView txtEventIntro;
         ImageView imgEvent;
@@ -99,6 +101,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             row = itemView.findViewById(R.id.row_list);
             txtEventName = itemView.findViewById(R.id.txtEventName);
             txtEventDate = itemView.findViewById(R.id.txtEventDate);
+            txtEventTime = itemView.findViewById(R.id.txtEventTime);
             txtEventLoc = itemView.findViewById(R.id.txtEventLoc);
             txtEventIntro = itemView.findViewById(R.id.txtEventIntro);
             imgEvent = itemView.findViewById(R.id.imgEvent);

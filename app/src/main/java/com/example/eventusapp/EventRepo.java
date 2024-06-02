@@ -20,6 +20,7 @@ import java.util.concurrent.ExecutorService;
 
 public class EventRepo {
 
+
     public void getAllEvents(ExecutorService srv, Handler uiHandler){
 
 
@@ -49,16 +50,21 @@ public class EventRepo {
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject current = arr.getJSONObject(i);
 
-
                     JSONObject dateObj = current.getJSONObject("date");
+
+                    String eventDate = dateObj.getString("year") + "-" + dateObj.getString("month") + "-" + dateObj.getString("day");
+                    String eventTime = dateObj.getString("hour") + "-" + dateObj.getString("minute");
 
                     Event myEvent = new Event(
                             current.getString("id"),
                             current.getString("name"),
                             current.getString("intro"),
-                            current.getString("org"),
-                            current.getString("loc"),
-                            dateObj.getString("time")
+                            current.getJSONObject("org").getString("name"),
+                            current.getJSONObject("loc").getString("location"),
+                            eventDate,
+                            eventTime,
+                            current.getString("imageUrl")
+
                     );
 
                     data.add(myEvent);
@@ -87,7 +93,7 @@ public class EventRepo {
 
         srv.execute(() -> {
             try {
-                URL url = new URL("http://10.0.2.2:8080/ourevents/events" + String.valueOf(id));
+                URL url = new URL("http://10.0.2.2:8080/ourevents/events/" + String.valueOf(id));
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
 
@@ -104,16 +110,20 @@ public class EventRepo {
 
                 JSONObject current = new JSONObject(buffer.toString());
 
-
                 JSONObject dateObj = current.getJSONObject("date");
+
+                String eventDate = dateObj.getString("year") + "-" + dateObj.getString("month") + "-" + dateObj.getString("day");
+                String eventTime = dateObj.getString("hour") + "-" + dateObj.getString("minute");
 
                 Event myEvent = new Event(
                         current.getString("id"),
                         current.getString("name"),
                         current.getString("intro"),
-                        current.getString("org"),
-                        current.getString("loc"),
-                        dateObj.getString("time")
+                        current.getJSONObject("org").getString("name"),
+                        current.getJSONObject("loc").getString("location"),
+                        eventDate,
+                        eventTime,
+                        current.getString("imageUrl")
                 );
 
 
