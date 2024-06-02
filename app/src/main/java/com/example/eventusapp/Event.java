@@ -12,7 +12,7 @@ public class Event implements Serializable {
     private String loc;
     private String eventDate;
     private String eventTime;
-    private String imageUrl;
+    //private String imageUrl;
 
     // Default constructor
     public Event() {
@@ -20,7 +20,7 @@ public class Event implements Serializable {
     }
 
     // Parameterized constructor
-    public Event(String id, String name, String intro, String org, String loc, String eventDate, String eventTime, String imageUrl) {
+    public Event(String id, String name, String intro, String org, String loc, String eventDate, String eventTime /*,String imageUrl*/) {
         this.id = id;
         this.name = name;
         this.intro = intro;
@@ -28,7 +28,7 @@ public class Event implements Serializable {
         this.loc = loc;
         this.eventDate = eventDate;
         this.eventTime = eventTime;
-        this.imageUrl = imageUrl;
+        //this.imageUrl = imageUrl;
     }
 
     // Getters and setters
@@ -76,7 +76,7 @@ public class Event implements Serializable {
 
     public String getEventTime() { return eventTime; }
     public void setEventTime(String eventTime) { this.eventTime = eventTime;}
-    public String getImageUrl() { return imageUrl; }
-    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    //public String getImageUrl() { return imageUrl; }
+    //public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
 }

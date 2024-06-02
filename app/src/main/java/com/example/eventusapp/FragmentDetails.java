@@ -45,7 +45,7 @@ public class FragmentDetails extends Fragment {
                 ((MainActivity) getActivity()).getToolBar().setTitle(event.getName());
 
                 // Load event image
-                loadEventImage(event.getImageUrl());
+                //loadEventImage(event.getImageUrl());
             } else {
                 Log.e("FragmentDetails", "Received null event");
             }

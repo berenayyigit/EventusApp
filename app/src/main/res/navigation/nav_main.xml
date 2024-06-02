@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/fragmentListEvent"
         android:name="com.example.eventusapp.FragmentListEvent"
-        android:label="Events"
+        android:label="Event List"
         tools:layout="@layout/fragment_list_event">
         <action
             android:id="@+id/action_fragmentListEvent_to_FragmentDetails"
@@ -17,7 +17,10 @@
     <fragment
         android:id="@+id/fragmentDetails"
         android:name="com.example.eventusapp.FragmentDetails"
-        android:label="Fragment Details">
-
+        android:label="Event Details">
+        <argument
+            android:name="event"
+            app:argType="com.example.eventusapp.Event"
+            app:nullable="false" />
     </fragment>
 </navigation>

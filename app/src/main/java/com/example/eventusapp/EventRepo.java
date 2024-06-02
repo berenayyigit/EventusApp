@@ -62,8 +62,8 @@ public class EventRepo {
                             current.getJSONObject("org").getString("name"),
                             current.getJSONObject("loc").getString("location"),
                             eventDate,
-                            eventTime,
-                            current.getString("imageUrl")
+                            eventTime
+                            // current.getString("imageUrl")
 
                     );
 
@@ -122,8 +122,8 @@ public class EventRepo {
                         current.getJSONObject("org").getString("name"),
                         current.getJSONObject("loc").getString("location"),
                         eventDate,
-                        eventTime,
-                        current.getString("imageUrl")
+                        eventTime
+                        // current.getString("imageUrl")
                 );
 
 
