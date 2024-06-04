@@ -1,6 +1,8 @@
 
 package com.example.eventusapp;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ public class FragmentListEvent extends Fragment {
 
     FragmentListEventBinding binding;
     private EventDataListener eventDataListener;
+    private EventAdapter eventAdapter; // Declare EventAdapter as a member variable
     public interface EventDataListener {
         void onEventDataReceived(List<Event> events);
     }
@@ -50,11 +53,15 @@ public class FragmentListEvent extends Fragment {
 
         binding.recView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        eventAdapter = new EventAdapter(getActivity(), new ArrayList<>());
+        binding.recView.setAdapter(eventAdapter);
+
         EventRepo repo = new EventRepo();
         ExecutorService srv = ((EventApplication) getActivity().getApplication()).srv;
 
         repo.getAllEvents(srv, new Handler(msg -> {
             List<Event> data = (List<Event>) msg.obj;
+            updateEventList(data); // Update the RecyclerView with the new data
             EventAdapter adapter = new EventAdapter(getActivity(), data);
             binding.recView.setAdapter(adapter);
 
@@ -66,5 +73,8 @@ public class FragmentListEvent extends Fragment {
         }));
 
         return binding.getRoot();
+    }
+    private void updateEventList(List<Event> events) {
+        eventAdapter.updateEvents(events);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.eventusapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -95,6 +98,11 @@ public class SaveEventActivity extends AppCompatActivity {
 
                 // Call saveEvent method from EventRepo
                 eventRepo.saveEvent(executorService, orgId, eventName, eventIntro, loc, eventYear, eventMonth,eventDay, eventHour, eventMinute, eventTime/*imagePath*/, uiHandler);
+
+                NavController navController = Navigation.findNavController(v);
+                navController.popBackStack(R.id.fragmentListEvent, false);
+                navController.navigate(R.id.fragmentListEvent);
+
             }
         });
 

@@ -17,15 +17,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutorService;
 
 public class UserRepo {
-    public void sayHelloJSON(ExecutorService srv, Handler uiHandler, String name, String lastname){
-
-        //Gson (Google's JSON package)
-
+    public void saveUser(ExecutorService srv, String username, String password, String name, String lastName, Handler uiHandler){
         srv.execute(()->{
 
             try {
-                URL url = new URL("http://10.3.0.14:8080/helloapi/sayhello/helloperson");
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                URL url = new URL("http://10.0.2.2:8080/user/register");
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
@@ -33,22 +31,29 @@ public class UserRepo {
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type","application/JSON");
 
-                JSONObject objToSend = new JSONObject();
-                objToSend.put("name",name);
-                objToSend.put("lastname",lastname);
 
-                //String outputData = "{\"name\":\""+ name +"\",\"lastname\":\""+ lastname+"\"}";
+                JSONObject outputData  = new JSONObject();
 
-                BufferedOutputStream writer = new BufferedOutputStream(conn.getOutputStream());
+                outputData.put("username", username);
+                outputData.put("password", password);
+                outputData.put("name", name);
+                outputData.put("lastName", lastName);
 
-                writer.write(objToSend.toString().getBytes(StandardCharsets.UTF_8));
+                //outputData.put("imagePath", imagePath);
+
+                BufferedOutputStream writer =
+                        new BufferedOutputStream(conn.getOutputStream());
+
+
+                writer.write(outputData.toString().getBytes(StandardCharsets.UTF_8));
                 writer.flush();
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
+                BufferedReader reader
+                        = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
                 StringBuilder buffer = new StringBuilder();
-                String line = "";
+
+                String line ="";
 
                 while((line=reader.readLine())!=null){
 
@@ -56,32 +61,28 @@ public class UserRepo {
 
                 }
 
+                JSONObject retVal = new JSONObject(buffer.toString());
+                conn.disconnect();
 
-                JSONObject obj = new JSONObject(buffer.toString());
 
-                String strDate = obj.getString("date");
-                String strName = obj.getString("fullname");
+                String retValStr = retVal.getString("result");
 
-                String retVal = "Date is " + strDate + ", and fullname is " + strName;
+                //Update Listener or handlers, it is for you to complete!
 
                 Message msg = new Message();
-                msg.obj = retVal;
+                msg.obj = retValStr;
                 uiHandler.sendMessage(msg);
 
-
-
             } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             } catch (JSONException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
 
 
         });
-
-
     }
 
 

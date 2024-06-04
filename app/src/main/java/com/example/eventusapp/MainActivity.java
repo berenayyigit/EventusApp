@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
             Toast.makeText(this, "An unexpected error occurred", Toast.LENGTH_SHORT).show();
         }
     }
-    
+
     private void filterEventsByDate(String date) {
         List<Event> filteredEvents = new ArrayList<>();
         for (Event event : allEvents) {
