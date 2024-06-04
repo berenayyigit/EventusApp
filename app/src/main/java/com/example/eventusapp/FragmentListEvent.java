@@ -1,3 +1,4 @@
+
 package com.example.eventusapp;
 
 import android.os.Bundle;
@@ -17,9 +18,18 @@ import com.example.eventusapp.databinding.FragmentListEventBinding;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+
 public class FragmentListEvent extends Fragment {
 
     FragmentListEventBinding binding;
+    private EventDataListener eventDataListener;
+    public interface EventDataListener {
+        void onEventDataReceived(List<Event> events);
+    }
+
+
+
+
 
     Handler dataHandler = new Handler(new Handler.Callback() {
         @Override
@@ -30,7 +40,9 @@ public class FragmentListEvent extends Fragment {
             return true;
         }
     });
-
+    public FragmentListEvent() {
+        // Required empty public constructor
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +52,18 @@ public class FragmentListEvent extends Fragment {
 
         EventRepo repo = new EventRepo();
         ExecutorService srv = ((EventApplication) getActivity().getApplication()).srv;
-        repo.getAllEvents(srv, dataHandler);
+
+        repo.getAllEvents(srv, new Handler(msg -> {
+            List<Event> data = (List<Event>) msg.obj;
+            EventAdapter adapter = new EventAdapter(getActivity(), data);
+            binding.recView.setAdapter(adapter);
+
+            // Pass the data to MainActivity
+            if (getActivity() instanceof EventDataListener) {
+                ((EventDataListener) getActivity()).onEventDataReceived(data);
+            }
+            return true;
+        }));
 
         return binding.getRoot();
     }

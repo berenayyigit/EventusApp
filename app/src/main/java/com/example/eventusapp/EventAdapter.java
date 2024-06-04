@@ -42,29 +42,29 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
     @Override
-            public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
-                Event event = data.get(position);
+    public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
+        Event event = data.get(position);
 
-                holder.txtEventName.setText(event.getName());
-                holder.txtEventDate.setText(event.getEventDate());
-                holder.txtEventTime.setText(event.getEventTime());
+        holder.txtEventName.setText(event.getName());
+        holder.txtEventDate.setText(event.getEventDate());
+        holder.txtEventTime.setText(event.getEventTime());
 
         ExecutorService srv = ((EventApplication)((MainActivity) ctx).getApplication()).srv;
-                Log.d("MyApp", "ExecutorService obtained successfully.");
+        Log.d("MyApp", "ExecutorService obtained successfully.");
 
-                holder.row.setOnClickListener(v -> {
-                    Log.d("MyApp", "Row clicked.");
-                    NavController navController = Navigation.findNavController((MainActivity) ctx, R.id.fragmentContainer);
-                    Log.d("MyApp", "NavController obtained.");
+        holder.row.setOnClickListener(v -> {
+            Log.d("MyApp", "Row clicked.");
+            NavController navController = Navigation.findNavController((MainActivity) ctx, R.id.fragmentContainer);
+            Log.d("MyApp", "NavController obtained.");
 
-                    String eventId = String.valueOf(data.get(holder.getBindingAdapterPosition()).getId());
+            String eventId = String.valueOf(data.get(holder.getBindingAdapterPosition()).getId());
 
-                    Bundle dataBundle = new Bundle();
-                    dataBundle.putString("eventId", eventId);
-                    Log.d("MyApp", "Event ID added to dataBundle.");
+            Bundle dataBundle = new Bundle();
+            dataBundle.putString("eventId", eventId);
+            Log.d("MyApp", "Event ID added to dataBundle.");
             Log.d("MyApp", "Event ID: " + eventId);
 
-            navController.navigate(R.id.action_fragmentListEvent_to_FragmentDetails, dataBundle);
+            navController.navigate(R.id.action_fragmentListEvent_to_fragmentDetails, dataBundle);
             Log.d("MyApp", "Navigating to FragmentDetails.");
         });
 
@@ -107,4 +107,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             imgEvent = itemView.findViewById(R.id.imgEvent);
         }
     }
+    public void updateEvents(List<Event> newEvents) {
+        this.data = newEvents;
+        notifyDataSetChanged();
+    }
+
 }

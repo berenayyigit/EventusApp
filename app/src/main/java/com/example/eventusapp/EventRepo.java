@@ -30,7 +30,7 @@ public class EventRepo {
                 List<Event> data = new ArrayList<>();
 
                 URL url =
-                        new URL("http://10.0.2.2:8080/ourevents/events");
+                        new URL("http://10.0.2.2:8080/ourevents/events/sort");
 
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

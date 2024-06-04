@@ -11,13 +11,27 @@
         android:label="Event List"
         tools:layout="@layout/fragment_list_event">
         <action
-            android:id="@+id/action_fragmentListEvent_to_FragmentDetails"
+            android:id="@+id/action_fragmentListEvent_to_fragmentSelectedDate"
+            app:destination="@id/fragmentSelectedDate" />
+        <action
+            android:id="@+id/action_fragmentListEvent_to_fragmentDetails"
             app:destination="@id/fragmentDetails" />
     </fragment>
+
     <fragment
         android:id="@+id/fragmentDetails"
         android:name="com.example.eventusapp.FragmentDetails"
         android:label="Event Details">
+        <argument
+            android:name="event"
+            app:argType="com.example.eventusapp.Event"
+            app:nullable="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentSelectedDate"
+        android:name="com.example.eventusapp.FragmentSelectedDate"
+        android:label="Selected Date">
         <argument
             android:name="event"
             app:argType="com.example.eventusapp.Event"

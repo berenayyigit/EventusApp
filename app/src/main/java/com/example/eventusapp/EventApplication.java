@@ -8,4 +8,3 @@ import java.util.concurrent.Executors;
 public class EventApplication extends Application {
     ExecutorService srv = Executors.newCachedThreadPool();
 }
-
