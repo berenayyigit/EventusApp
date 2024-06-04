@@ -2,6 +2,7 @@ package com.example.eventusapp;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,6 +85,57 @@ public class UserRepo {
 
         });
     }
+    public void checkLogin(String username, String password, ExecutorService executorService, Handler uiHandler) {
+        executorService.execute(() -> {
+            try {
+                URL url = new URL("http://10.0.2.2:8080/user/login");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/JSON");
+
+                JSONObject loginData = new JSONObject();
+                loginData.put("username", username);
+                loginData.put("password", password);
+
+                BufferedOutputStream writer = new BufferedOutputStream(conn.getOutputStream());
+                writer.write(loginData.toString().getBytes(StandardCharsets.UTF_8));
+                writer.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder buffer = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
 
 
+                // Log raw response data
+                Log.d("UserRepo", "Raw Response Data: " + buffer.toString());
+
+
+                JSONObject response = new JSONObject(buffer.toString());
+                String result = response.getString("status");
+
+                // Log the server response
+                Log.d("LoginActivity", "Server Response: " + result);
+
+                Message msg = new Message();
+                msg.obj = result;
+                uiHandler.sendMessage(msg);
+
+                conn.disconnect();
+            } catch (Exception e) {
+                Log.e("LoginError", "Error during login", e);
+
+                // Send an error message to the UI handler
+                Message msg = new Message();
+                msg.obj = "Login Failed";
+                uiHandler.sendMessage(msg);
+            }
+        });
+    }
 }
+
+
