@@ -1,6 +1,7 @@
 package com.example.eventusapp;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -11,6 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 import android.os.Bundle;
 import android.widget.Button;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
     private MainActivity eventDataListener;
     private List<Event> allEvents ;
     private Button btnSelectDate;
+    private Button buttonNavigateToSaveEvent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +47,23 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
         NavigationUI.setupWithNavController(toolBar, navController, conf);
 
         // btnSelectDate initialization and click listener
-        Button btnSelectDate = findViewById(R.id.btnSelectDate);
+        btnSelectDate = findViewById(R.id.btnSelectDate);
         btnSelectDate.setOnClickListener(v -> showDatePickerDialog());
+
+        // Initialize buttonNavigateToSaveEvent and set click listener
+        buttonNavigateToSaveEvent = findViewById(R.id.buttonNavigateToSaveEvent);
+        buttonNavigateToSaveEvent.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick( View v) {
+
+                Intent intent = new Intent(MainActivity.this, SaveEventActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
     }
 
     private void showDatePickerDialog() {
@@ -60,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
                 }, year, month, day);
         datePickerDialog.show();
     }
+
+
+
     @Override
     public void onEventDataReceived(List<Event> events) {
         // This method will be called when the list of events is received from FragmentListEvent
@@ -93,12 +115,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
             Toast.makeText(this, "An unexpected error occurred", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
-
-
-
+    
     private void filterEventsByDate(String date) {
         List<Event> filteredEvents = new ArrayList<>();
         for (Event event : allEvents) {

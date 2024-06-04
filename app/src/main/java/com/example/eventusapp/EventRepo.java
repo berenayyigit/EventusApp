@@ -8,12 +8,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -143,6 +145,78 @@ public class EventRepo {
 
         });
 
+    }
+    public void saveEvent(ExecutorService srv, String orgid, String name, String intro, String loc, String year, String month, String day, String hour, String minute, String eventime, Handler uiHandler){
+        srv.execute(()->{
+
+            try {
+                URL url = new URL("http://10.0.2.2:8080/ourevents/events/save");
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type","application/JSON");
+
+
+                JSONObject outputData  = new JSONObject();
+
+                outputData.put("orgid", orgid);
+                outputData.put("name", name);
+                outputData.put("intro", intro);
+                outputData.put("loc", loc);
+                outputData.put("year", year);
+                outputData.put("month", month);
+                outputData.put("day", day);
+                outputData.put("hour", hour);
+                outputData.put("minute", minute);
+                outputData.put("eventime", eventime);
+                //outputData.put("imagePath", imagePath);
+
+                BufferedOutputStream writer =
+                        new BufferedOutputStream(conn.getOutputStream());
+
+
+                writer.write(outputData.toString().getBytes(StandardCharsets.UTF_8));
+                writer.flush();
+
+                BufferedReader reader
+                        = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                StringBuilder buffer = new StringBuilder();
+
+                String line ="";
+
+                while((line=reader.readLine())!=null){
+
+                    buffer.append(line);
+
+                }
+
+                JSONObject retVal = new JSONObject(buffer.toString());
+                conn.disconnect();
+
+
+                String retValStr = retVal.getString("result");
+
+                //Update Listener or handlers, it is for you to complete!
+
+                Message msg = new Message();
+                msg.obj = retValStr;
+                uiHandler.sendMessage(msg);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        });
     }
 
 }

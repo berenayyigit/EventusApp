@@ -28,22 +28,31 @@
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="1dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnSelectDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:navGraph="@navigation/nav_main" />
+
         <Button
             android:id="@+id/btnSelectDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select Date"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/buttonNavigateToSaveEvent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="16dp" />
 
-
+        <Button
+            android:id="@+id/buttonNavigateToSaveEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Event"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="32dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
