@@ -104,7 +104,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             txtEventTime = itemView.findViewById(R.id.txtEventTime);
             txtEventLoc = itemView.findViewById(R.id.txtEventLoc);
             txtEventIntro = itemView.findViewById(R.id.txtEventIntro);
-            imgEvent = itemView.findViewById(R.id.imgEvent);
+
         }
     }
     public void updateEvents(List<Event> newEvents) {

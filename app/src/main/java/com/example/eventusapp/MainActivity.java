@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
     Toolbar toolBar;
     private MainActivity eventDataListener;
     private List<Event> allEvents ;
-    private Button btnSelectDate;
+
     private Button buttonNavigateToSaveEvent;
     private Button buttonNavigateToSaveOrg;
 
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
 
     private Button buttonNavigateToUpdateOrg;
     private Button buttonNavigateToUpdateEvent;
+    private Button buttonNavigateToSearchEventDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +55,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
         toolBar.setTitle("Events");
         NavigationUI.setupWithNavController(toolBar, navController, conf);
 
-        // btnSelectDate initialization and click listener
-        btnSelectDate = findViewById(R.id.btnSelectDate);
-        btnSelectDate.setOnClickListener(v -> showDatePickerDialog());
+
 
         // Initialize buttonNavigateToSaveEvent and set click listener
         buttonNavigateToSaveEvent = findViewById(R.id.buttonNavigateToSaveEvent);
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
         buttonNavigateToDeleteOrg = findViewById(R.id.buttonNavigateToDeleteOrg);
         buttonNavigateToUpdateOrg = findViewById(R.id.buttonNavigateToUpdateOrg);
         buttonNavigateToUpdateEvent = findViewById(R.id.buttonNavigateToUpdateEvent);
-
+        buttonNavigateToSearchEventDate = findViewById(R.id.buttonNavigateToSearchEventDate);
         buttonNavigateToSaveEvent.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -128,11 +127,22 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
 
             }
         });
+        buttonNavigateToSearchEventDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick( View v) {
+
+                Intent intent = new Intent(MainActivity.this, SearchEventDateActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
 
 
 
     }
-
+    /*
     private void showDatePickerDialog() {
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -146,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
                 }, year, month, day);
         datePickerDialog.show();
     }
+    */
+
 
 
 
@@ -183,6 +195,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
         }
     }
 
+
+
     private void filterEventsByDate(String date) {
         List<Event> filteredEvents = new ArrayList<>();
         for (Event event : allEvents) {
@@ -197,7 +211,11 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
         eventAdapter.updateEvents(filteredEvents);
         Toast.makeText(this, "Selected Date: " + date, Toast.LENGTH_SHORT).show();
     }
+
+
     public Toolbar getToolBar() {
         return toolBar;
     }
+
+
 }

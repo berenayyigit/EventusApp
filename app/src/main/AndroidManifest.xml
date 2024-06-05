@@ -42,5 +42,9 @@
             android:exported="false"/>
         <activity android:name=".UpdateEventActivity"
             android:exported="false"/>
+        <activity android:name=".SearchEventDateActivity"
+            android:exported="false"/>
+        <activity android:name=".DisplaySearchResultsActivity"
+            android:exported="false"/>
     </application>
 </manifest>

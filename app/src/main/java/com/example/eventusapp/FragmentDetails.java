@@ -78,20 +78,5 @@ public class FragmentDetails extends Fragment {
         return binding.getRoot();
     }
 
-    private void loadEventImage(String imageUrl) {
-        ExecutorService srv = ((EventApplication) getActivity().getApplication()).srv;
-        srv.submit(() -> {
-            try {
-                URL url = new URL(imageUrl);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-                getActivity().runOnUiThread(() -> binding.imgEvent.setImageBitmap(myBitmap));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+
 }

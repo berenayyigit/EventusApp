@@ -310,6 +310,82 @@ public class EventRepo {
             }
         });
     }
+    public void searchEventsByDate(ExecutorService srv, String year, String month, String day, String hour, String minute, String time, Handler uiHandler) {
+        srv.execute(() -> {
+            try {
+                URL url = new URL("http://10.0.2.2:8080/ourevents/events/datesearch");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json");
+
+                // Create the date JSON object
+                JSONObject dateObject = new JSONObject();
+                dateObject.put("year", year);
+                dateObject.put("month", month);
+                dateObject.put("day", day);
+                dateObject.put("hour", hour);
+                dateObject.put("minute", minute);
+                dateObject.put("time",time);
+
+                // Create the main JSON object
+                JSONObject inputData = new JSONObject();
+                inputData.put("date", dateObject);
+
+                BufferedOutputStream writer = new BufferedOutputStream(conn.getOutputStream());
+                writer.write(inputData.toString().getBytes(StandardCharsets.UTF_8));
+                writer.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder buffer = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+
+                JSONArray eventArray = new JSONArray(buffer.toString());
+                conn.disconnect();
+
+                List<Event> events = new ArrayList<>();
+                for (int i = 0; i < eventArray.length(); i++) {
+                    JSONObject current = eventArray.getJSONObject(i);
+
+                    JSONObject dateObj = current.getJSONObject("date");
+
+                    String eventDate = dateObj.getString("year") + "-" + dateObj.getString("month") + "-" + dateObj.getString("day");
+                    String eventTime = dateObj.getString("hour") + "-" + dateObj.getString("minute");
+
+                    Event myEvent = new Event(
+                            current.getString("id"),
+                            current.getString("name"),
+                            current.getString("intro"),
+                            current.getJSONObject("org").getString("name"),
+                            current.getJSONObject("loc").getString("location"),
+                            eventDate,
+                            eventTime
+                    );
+
+                    events.add(myEvent);
+                }
+
+                // Update UI with the search results
+                Message msg = new Message();
+                msg.obj = events;
+                uiHandler.sendMessage(msg);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
 
 
 }
