@@ -161,18 +161,22 @@ public class EventRepo {
                 conn.setRequestProperty("Content-Type","application/JSON");
 
 
-                JSONObject outputData  = new JSONObject();
+                // Create the nested date JSON object
+                JSONObject dateObject = new JSONObject();
+                dateObject.put("year", year);
+                dateObject.put("month", month);
+                dateObject.put("day", day);
+                dateObject.put("hour", hour);
+                dateObject.put("minute", minute);
+                dateObject.put("time", year + "-" + month + "-" + day + "-" + hour + "-" + minute);
 
+                // Create the main JSON object
+                JSONObject outputData = new JSONObject();
                 outputData.put("orgid", orgid);
                 outputData.put("name", name);
                 outputData.put("intro", intro);
                 outputData.put("loc", loc);
-                outputData.put("year", year);
-                outputData.put("month", month);
-                outputData.put("day", day);
-                outputData.put("hour", hour);
-                outputData.put("minute", minute);
-                outputData.put("eventime", eventime);
+                outputData.put("date", dateObject);
                 //outputData.put("imagePath", imagePath);
 
                 BufferedOutputStream writer =
