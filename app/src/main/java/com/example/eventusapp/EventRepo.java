@@ -251,6 +251,65 @@ public class EventRepo {
             }
         });
     }
+    public void updateEvent(ExecutorService srv, String eventId, String orgId, String name, String intro, String loc, String year, String month, String day, String hour, String minute, Handler uiHandler) {
+        srv.execute(() -> {
+            try {
+                URL url = new URL("http://10.0.2.2:8080/ourevents/events/update/" + eventId);
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                conn.setRequestMethod("PUT");
+                conn.setRequestProperty("Content-Type", "application/json");
+
+                // Create the nested date JSON object
+                JSONObject dateObject = new JSONObject();
+                dateObject.put("year", year);
+                dateObject.put("month", month);
+                dateObject.put("day", day);
+                dateObject.put("hour", hour);
+                dateObject.put("minute", minute);
+                dateObject.put("time", year + "-" + month + "-" + day + "-" + hour + "-" + minute);
+
+                // Create the main JSON object
+                JSONObject outputData = new JSONObject();
+                outputData.put("orgid", orgId);
+                outputData.put("name", name);
+                outputData.put("intro", intro);
+                outputData.put("loc", loc);
+                outputData.put("date", dateObject);
+
+                BufferedOutputStream writer = new BufferedOutputStream(conn.getOutputStream());
+                writer.write(outputData.toString().getBytes(StandardCharsets.UTF_8));
+                writer.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder buffer = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+
+                JSONObject retVal = new JSONObject(buffer.toString());
+                conn.disconnect();
+
+                String retValStr = retVal.getString("result");
+
+                // Update UI with the result
+                Message msg = new Message();
+                msg.obj = retValStr;
+                uiHandler.sendMessage(msg);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
 
 }

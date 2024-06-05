@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".UpdateEventActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Update Event" />
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/editTextEventId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Event ID" />
+
+                <EditText
+                    android:id="@+id/editTextOrgId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextEventId"
+                    android:hint="Organization ID" />
+
+                <EditText
+                    android:id="@+id/editTextEventName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextOrgId"
+                    android:hint="Event Name" />
+
+                <EditText
+                    android:id="@+id/editTextEventIntro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextEventName"
+                    android:hint="Event Introduction" />
+
+                <EditText
+                    android:id="@+id/editTextLoc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextEventIntro"
+                    android:hint="Location" />
+
+                <EditText
+                    android:id="@+id/editTextEventYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextLoc"
+                    android:hint="Year" />
+
+                <EditText
+                    android:id="@+id/editTextEventMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextEventYear"
+                    android:hint="Month" />
+
+                <EditText
+                    android:id="@+id/editTextEventDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextEventMonth"
+                    android:hint="Day" />
+
+                <EditText
+                    android:id="@+id/editTextEventHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextEventDay"
+                    android:hint="Hour" />
+
+                <EditText
+                    android:id="@+id/editTextEventMinute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextEventHour"
+                    android:hint="Minute" />
+
+                <EditText
+                    android:id="@+id/editTextEventTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextEventMinute"
+                    android:hint="Event Time" />
+
+                <!-- Add more EditText fields as needed for other input data -->
+
+                <Button
+                    android:id="@+id/buttonUpdateEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editTextEventTime"
+                    android:text="Update Event" />
+
+            </RelativeLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

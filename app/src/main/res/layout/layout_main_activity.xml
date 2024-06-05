@@ -28,7 +28,7 @@
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="1dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/btnSelectDate"
+            app:layout_constraintBottom_toTopOf="@+id/buttonRow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -38,56 +38,73 @@
             android:id="@+id/btnSelectDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
             android:text="Select Date"
-            app:layout_constraintBottom_toTopOf="@+id/buttonNavigateToSaveEvent"
+            app:layout_constraintBottom_toTopOf="@+id/buttonRow"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.057"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/buttonNavigateToSaveEvent"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/buttonRow"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="Add Event"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.054"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/buttonNavigateToSaveOrg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="Add Org"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.482"
-            app:layout_constraintStart_toStartOf="parent" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonNavigateToDeleteEvent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="56dp"
-            android:text="Delete Event"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.94"
-            app:layout_constraintStart_toStartOf="parent" />
+                <Button
+                    android:id="@+id/buttonNavigateToSaveEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add Event" />
 
-        <Button
-            android:id="@+id/buttonNavigateToDeleteOrg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Delete Org"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.943"
-            app:layout_constraintStart_toStartOf="parent" />
+                <Button
+                    android:id="@+id/buttonNavigateToSaveOrg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add Org" />
+
+                <Button
+                    android:id="@+id/buttonNavigateToDeleteEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delete Event" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/buttonNavigateToDeleteOrg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Delete Org" />
+
+                <Button
+                    android:id="@+id/buttonNavigateToUpdateOrg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Update Org" />
+
+                <Button
+                    android:id="@+id/buttonNavigateToUpdateEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Update Event" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

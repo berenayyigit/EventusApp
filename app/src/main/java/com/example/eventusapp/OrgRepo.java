@@ -123,4 +123,46 @@ public class OrgRepo {
             }
         });
     }
+    public void updateOrg(ExecutorService srv, String organizationId, String name, Handler uiHandler) {
+        srv.execute(() -> {
+            try {
+                URL url = new URL("http://10.0.2.2:8080/ourevents/organizations/update/" + organizationId);
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                conn.setRequestMethod("PUT");
+                conn.setRequestProperty("Content-Type", "application/JSON");
+
+                JSONObject outputData = new JSONObject();
+                outputData.put("name", name);
+
+                BufferedOutputStream writer = new BufferedOutputStream(conn.getOutputStream());
+                writer.write(outputData.toString().getBytes(StandardCharsets.UTF_8));
+                writer.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                StringBuilder buffer = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+
+                JSONObject retVal = new JSONObject(buffer.toString());
+                conn.disconnect();
+
+                Message msg = new Message();
+                msg.obj = retVal.toString(); // You can change this based on what you need to pass to the handler
+                uiHandler.sendMessage(msg);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
