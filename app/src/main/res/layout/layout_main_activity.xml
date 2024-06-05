@@ -62,18 +62,24 @@
                     android:id="@+id/buttonNavigateToSaveEvent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="Add Event" />
 
                 <Button
                     android:id="@+id/buttonNavigateToSaveOrg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="Add Org" />
 
                 <Button
                     android:id="@+id/buttonNavigateToDeleteEvent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="Delete Event" />
 
             </LinearLayout>
@@ -88,18 +94,24 @@
                     android:id="@+id/buttonNavigateToDeleteOrg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="Delete Org" />
 
                 <Button
                     android:id="@+id/buttonNavigateToUpdateOrg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="Update Org" />
 
                 <Button
                     android:id="@+id/buttonNavigateToUpdateEvent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="Update Event" />
 
             </LinearLayout>
