@@ -99,9 +99,8 @@ public class SaveEventActivity extends AppCompatActivity {
                 // Call saveEvent method from EventRepo
                 eventRepo.saveEvent(executorService, orgId, eventName, eventIntro, loc, eventYear, eventMonth,eventDay, eventHour, eventMinute, eventTime/*imagePath*/, uiHandler);
 
-                NavController navController = Navigation.findNavController(v);
-                navController.popBackStack(R.id.fragmentListEvent, false);
-                navController.navigate(R.id.fragmentListEvent);
+                Intent intent = new Intent(SaveEventActivity.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });

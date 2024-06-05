@@ -34,5 +34,9 @@
             android:exported="false"/>
         <activity android:name=".SaveOrgActivity"
             android:exported="false"/>
+        <activity android:name=".DeleteEventActivity"
+            android:exported="false"/>
+        <activity android:name=".DeleteOrgActivity"
+            android:exported="false"/>
     </application>
 </manifest>

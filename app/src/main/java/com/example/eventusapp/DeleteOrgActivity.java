@@ -1,4 +1,5 @@
 package com.example.eventusapp;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +17,8 @@ import androidx.navigation.Navigation;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-public class SaveOrgActivity extends AppCompatActivity {
+
+public class DeleteOrgActivity extends AppCompatActivity {
 
     private ExecutorService executorService;
     private Handler uiHandler;
@@ -25,8 +27,7 @@ public class SaveOrgActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_save_org);
-
+        setContentView(R.layout.activity_delete_org);
 
         // Initialize ExecutorService
         executorService = Executors.newFixedThreadPool(4);
@@ -38,10 +39,12 @@ public class SaveOrgActivity extends AppCompatActivity {
                 // Handle the UI update here
                 // For example, show a Toast message with the result
                 String result = (String) msg.obj;
-                Toast.makeText(SaveOrgActivity.this, result, Toast.LENGTH_SHORT).show();
+                Toast.makeText(DeleteOrgActivity.this, result, Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
+
+        // Initialize OrgRepo
         orgRepo = new OrgRepo();
 
         // Set up the toolbar
@@ -49,25 +52,25 @@ public class SaveOrgActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        EditText editTextOrgName = findViewById(R.id.editTextOrgName);
-        Button buttonSaveOrg = findViewById(R.id.buttonSaveOrg);
-        buttonSaveOrg.setOnClickListener(new View.OnClickListener() {
+
+        // Get reference to the UI element
+        EditText editTextOrgId = findViewById(R.id.editTextOrgId);
+        Button buttonDeleteOrg = findViewById(R.id.buttonDeleteOrg);
+
+
+        // Set click listener for the Delete button
+        buttonDeleteOrg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Collect data from the input fields
-                String orgName = editTextOrgName.getText().toString();
+                // Get the organization ID from the input field
+                String orgId = editTextOrgId.getText().toString();
 
+                // Call deleteOrg method from OrgRepo
+                orgRepo.deleteOrg(executorService, orgId, uiHandler);
 
-                // Call saveEvent method from EventRepo
-                orgRepo.saveOrg(executorService, orgName, uiHandler);
-
-                Intent intent = new Intent(SaveOrgActivity.this, MainActivity.class);
+                Intent intent = new Intent(DeleteOrgActivity.this, MainActivity.class);
                 startActivity(intent);
-
             }
         });
-
     }
-
-
 }

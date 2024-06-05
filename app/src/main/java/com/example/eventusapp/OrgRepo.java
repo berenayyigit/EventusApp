@@ -87,4 +87,40 @@ public class OrgRepo {
 
         });
     }
+    public void deleteOrg(ExecutorService srv, String organizationId, Handler uiHandler) {
+        srv.execute(() -> {
+            try {
+                URL url = new URL("http://10.0.2.2:8080/ourevents/organizations/delete/" + organizationId);
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("DELETE");
+
+                BufferedReader reader =
+                        new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                StringBuilder buffer = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+
+                JSONObject retVal = new JSONObject(buffer.toString());
+                conn.disconnect();
+
+                String retValStr = retVal.getString("result");
+
+                Message msg = new Message();
+                msg.obj = retValStr;
+                uiHandler.sendMessage(msg);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }

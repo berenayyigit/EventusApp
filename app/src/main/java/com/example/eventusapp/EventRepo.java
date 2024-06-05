@@ -218,5 +218,35 @@ public class EventRepo {
 
         });
     }
+    public void deleteEvent(ExecutorService srv, String eventId, Handler uiHandler) {
+        srv.execute(() -> {
+            try {
+                URL url = new URL("http://10.0.2.2:8080/ourevents/events/delete/" + eventId);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("DELETE");
+
+                int responseCode = conn.getResponseCode();
+
+                String message;
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    message = "Event deleted successfully";
+                } else {
+                    message = "Failed to delete event";
+                }
+
+                // Update UI with the result
+                Message msg = new Message();
+                msg.obj = message;
+                uiHandler.sendMessage(msg);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
 
 }

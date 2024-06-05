@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
     private Button buttonNavigateToSaveEvent;
     private Button buttonNavigateToSaveOrg;
 
+    private Button buttonNavigateToDeleteEvent;
+
+    private Button buttonNavigateToDeleteOrg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
         // Initialize buttonNavigateToSaveEvent and set click listener
         buttonNavigateToSaveEvent = findViewById(R.id.buttonNavigateToSaveEvent);
         buttonNavigateToSaveOrg = findViewById(R.id.buttonNavigateToSaveOrg);
+        buttonNavigateToDeleteEvent = findViewById(R.id.buttonNavigateToDeleteEvent);
+        buttonNavigateToDeleteOrg = findViewById(R.id.buttonNavigateToDeleteOrg);
+
         buttonNavigateToSaveEvent.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -71,6 +78,26 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
             public void onClick( View v) {
 
                 Intent intent = new Intent(MainActivity.this, SaveOrgActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonNavigateToDeleteEvent.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick( View v) {
+
+                Intent intent = new Intent(MainActivity.this, DeleteEventActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonNavigateToDeleteOrg.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick( View v) {
+
+                Intent intent = new Intent(MainActivity.this, DeleteOrgActivity.class);
                 startActivity(intent);
             }
         });
