@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
     private List<Event> allEvents ;
     private Button btnSelectDate;
     private Button buttonNavigateToSaveEvent;
+    private Button buttonNavigateToSaveOrg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
 
         // Initialize buttonNavigateToSaveEvent and set click listener
         buttonNavigateToSaveEvent = findViewById(R.id.buttonNavigateToSaveEvent);
+        buttonNavigateToSaveOrg = findViewById(R.id.buttonNavigateToSaveOrg);
         buttonNavigateToSaveEvent.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -63,6 +65,17 @@ public class MainActivity extends AppCompatActivity implements FragmentListEvent
 
             }
         });
+        buttonNavigateToSaveOrg.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick( View v) {
+
+                Intent intent = new Intent(MainActivity.this, SaveOrgActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 

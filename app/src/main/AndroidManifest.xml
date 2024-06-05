@@ -32,5 +32,7 @@
             android:exported="false" />
         <activity android:name=".SaveEventActivity"
             android:exported="false"/>
+        <activity android:name=".SaveOrgActivity"
+            android:exported="false"/>
     </application>
 </manifest>
